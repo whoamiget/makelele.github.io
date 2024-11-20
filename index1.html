@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trianguito Ochentero</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff0080, #8000ff);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 0, 128, 0.6);
+            margin-top: 20px;
+            animation: glow 2s infinite;
+        }
+
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 0, 128, 0.6);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 40px rgba(255, 0, 128, 0.8);
+            }
+            100% {
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 0, 128, 0.6);
+            }
+        }
+
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 200px solid white;
+            margin: 0 auto;
+            animation: spin 4s linear infinite, bounce 2s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .info {
+            margin-top: 30px;
+        }
+
+        .instagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 0, 128, 0.6);
+        }
+
+        .instagram img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .message {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+
+        footer {
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        footer span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        footer span img {
+            width: 14px;
+            height: 14px;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .triangle {
+                border-left: 80px solid transparent;
+                border-right: 80px solid transparent;
+                border-bottom: 160px solid white;
+            }
+
+            .instagram {
+                font-size: 1.2rem;
+            }
+
+            .instagram img {
+                width: 24px;
+                height: 24px;
+            }
+
+            footer {
+                font-size: 0.8rem;
+            }
+
+            footer span img {
+                width: 12px;
+                height: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Trianguito Ochentero</h1>
+    <div class="triangle"></div>
+    <div class="info">
+        <div class="instagram">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram logo">
+            makelele3.0_
+        </div>
+        <div class="message">Pronto más información</div>
+    </div>
+    <footer>
+        <span>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Copyright_icon.svg" alt="Copyright icon">
+            by andrip 2024 &copy;
+        </span>
+    </footer>
+</body>
+</html>
