@@ -1,0 +1,30 @@
+<div class="info">
+    <div class="triangle"></div>
+    <div class="login-form">
+        <h2>Iniciar Sesión</h2>
+        <input type="text" id="username" placeholder="Usuario">
+        <input type="password" id="password" placeholder="Contraseña">
+        <button onclick="login()">Acceder</button>
+    </div>
+</div>
+<footer>
+    <span>by andrip 2024 &copy;</span>
+</footer>
+
+<!-- Importar el archivo de credenciales -->
+<script src="credentials.js"></script>
+
+<script>
+    function login() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        // Verificar con las credenciales cargadas desde credentials.js
+        if (username === credentials.username && password === credentials.password) {
+            localStorage.setItem('authToken', 'authenticated');
+            window.location.href = 'index2.html';
+        } else {
+            alert('Usuario o contraseña incorrectos');
+        }
+    }
+</script>

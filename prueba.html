@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trianguito Ochentero</title>
+    <link data-default-icon="" rel="icon" sizes="192x192" href="https://cdn.icon-icons.com/icons2/321/PNG/512/Triangle_34546.png">
+    <style>
+        /* Mantiene todos los estilos existentes */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff0080, #8000ff);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Trianguito Ochentero</h1>
+    <div class="info">
+        <div class="triangle"></div>
+        <div class="login-form">
+            <h2>Iniciar Sesión</h2>
+            <input type="text" id="username" placeholder="Usuario">
+            <input type="password" id="password" placeholder="Contraseña">
+            <button onclick="login()">Acceder</button>
+        </div>
+    </div>
+    <footer>
+        <span>by andrip 2024 &copy;</span>
+    </footer>
+
+    <!-- Importar el archivo de credenciales -->
+    <script src="credentials.js"></script>
+
+    <script>
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Verificar con las credenciales cargadas desde credentials.js
+            if (username === credentials.username && password === credentials.password) {
+                localStorage.setItem('authToken', 'authenticated');
+                window.location.href = 'index2.html';
+            } else {
+                alert('Usuario o contraseña incorrectos');
+            }
+        }
+    </script>
+</body>
+</html>

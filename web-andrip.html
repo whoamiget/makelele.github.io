@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Andrip - Cargando</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #000000, #444444);
+            overflow: hidden;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 6px solid rgba(255, 255, 255, 0.3);
+            border-top: 6px solid #fff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        h1 {
+            position: absolute;
+            top: 80%;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            font-size: 1.5rem;
+            text-shadow: 0 0 10px #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="spinner"></div>
+    <h1>Cargando... Licencia Andrip</h1>
+
+    <script>
+        setTimeout(() => {
+            window.location.href = "index4.html"; // Redirigir a la web final
+        }, 3); // Cambia 3000 a los segundos que quieras esperar
+    </script>
+</body>
+</html>
