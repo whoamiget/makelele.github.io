@@ -54,15 +54,12 @@
     </style>
 </head>
 <body>
-    <!-- Pantalla de carga -->
     <div class="loading-screen">
         <div id="logs">
-            <!-- Los logs aparecerán aquí dinámicamente -->
         </div>
     </div>
 
     <script>
-        // Logs a mostrar poco a poco
         const logMessages = [
             "[2024-11-27 12:34:56] INFO: Servidor iniciado bajo licencia Andrip v1.0",
             "[2024-11-27 12:34:57] INFO: Cargando archivos estáticos...",
@@ -74,9 +71,8 @@
         ];
 
         const logsContainer = document.getElementById("logs");
-
-        // Mostrar los logs uno a uno
         let index = 0;
+
         const interval = setInterval(() => {
             if (index < logMessages.length) {
                 const log = document.createElement("p");
@@ -85,21 +81,10 @@
                 logsContainer.appendChild(log);
                 index++;
             } else {
-                clearInterval(interval); // Detener el intervalo
-                goToMainWebsite(); // Ir a la web principal
+                clearInterval(interval);
+                window.location.href = "web-andrip.html"; 
             }
-        }, 500); // Agregar un log cada 500ms
-
-        // Función para redirigir a la web principal
-        function goToMainWebsite() {
-            setTimeout(() => {
-                document.body.innerHTML = ""; // Limpiar pantalla
-                document.body.style.backgroundColor = "#fff"; // Cambiar fondo
-                document.body.style.color = "#000"; // Cambiar color del texto
-                document.body.innerHTML = `<h1>¡Bienvenido a la Web Andrip!</h1>`;
-                // Aquí puedes redirigir o cargar el contenido real.
-            }, 1000);
-        }
+        }, 500);
     </script>
 </body>
 </html>
