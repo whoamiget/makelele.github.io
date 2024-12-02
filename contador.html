@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuenta Atrás con Fuegos Artificiales</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Estilos de la cuenta atrás */
+        .countdown-container {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            text-align: left;
+            z-index: 10;
+        }
+
+        .countdown-container h2 {
+            margin-top: 0;
+            color: #222;
+            text-transform: uppercase;
+            font-size: 1.2rem;
+        }
+
+        .event h3 {
+            color: #ff5722;
+            font-size: 1rem;
+            margin: 10px 0 5px;
+        }
+
+        .event p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        #countdown {
+            margin-top: 10px;
+            font-size: 1.5rem;
+            color: #333;
+            font-weight: bold;
+            text-align: center;
+            background: #eee;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        /* Fuegos artificiales */
+        .fireworks {
+            position: fixed;
+            top: 50%;
+            left: 0;
+            width: 200px;
+            height: 200px;
+            pointer-events: none;
+            z-index: 1; 
+        }
+
+        .firework {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: blue;
+            border-radius: 50%;
+            opacity: 1;
+            animation: explode 1s forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(3);
+                opacity: 0;
+            }
+        }
+
+        /* Triángulo centrado */
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 100px solid #ff5722;
+            position: relative;
+            z-index: 2;
+            margin-left: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown-container">
+        <h2>Próximo Evento</h2>
+        <div class="event">
+            <h3>Makelele Awards</h3>
+            <p>31 de Octubre de 2025</p>
+            <div id="countdown"></div>
+        </div>
+    </div>
+
+    <div class="fireworks" id="fireworks"></div>
+
+    <div class="triangle"></div>
+
+    <script>
+        // Fecha del próximo evento: Halloween 2025
+        const eventDate = new Date('October 31, 2025 00:00:00').getTime();
+        const oneWeekBefore = new Date(eventDate - 7 * 24 * 60 * 60 * 1000); // Una semana antes del evento
+
+        let fireworkColor = 'blue'; // Color predeterminado de los fuegos artificiales
+
+        // Función para actualizar la cuenta atrás
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeLeft = eventDate - now;
+
+            if (timeLeft > 0) {
+                // Cálculo de meses, días, horas, minutos y segundos restantes
+                const months = Math.floor(timeLeft / (1000 * 60 * 60 * 24 * 30)); // Aproximadamente 30 días por mes
+                const days = Math.floor((timeLeft % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                // Actualización del contenido HTML
+                document.getElementById('countdown').innerHTML = 
+                    `${months}m ${days}d ${hours}h ${minutes}m ${seconds}s`;
+            } else if (timeLeft <= 0 && timeLeft > -1000) {
+                // El mismo día del evento, mostrar explosiones
+                document.getElementById('countdown').innerHTML = "¡Es el día! ¡Explosiones!";
+                fireworkColor = 'red'; // Cambiar a rojo el día del evento
+                showFireworks();
+            } else {
+                // Si la cuenta atrás llega a cero y el evento ya pasó
+                document.getElementById('countdown').innerHTML = "¡Evento en curso!";
+            }
+        }
+
+        // Mostrar fuegos artificiales
+        function showFireworks() {
+            const fireworksContainer = document.getElementById('fireworks');
+            const firework = document.createElement('div');
+            firework.classList.add('firework');
+            firework.style.backgroundColor = fireworkColor;
+
+            // Posicionar los fuegos artificiales en un área predefinida (izquierda del triángulo)
+            firework.style.left = `${Math.random() * 100}px`;
+            firework.style.top = `${Math.random() * 100}px`;
+
+            fireworksContainer.appendChild(firework);
+
+            // Eliminar los fuegos después de 1 segundo
+            setTimeout(() => {
+                fireworksContainer.removeChild(firework);
+            }, 1000);
+        }
+
+        // Función que sigue al cursor (para fuego en movimiento)
+        document.addEventListener('mousemove', (event) => {
+            if (event.target === document.body) {
+                showFireworks(); // Mostrar fuegos al mover el cursor
+            }
+        });
+
+        // Actualización cada segundo
+        setInterval(updateCountdown, 1000);
+
+        // Llamada inicial
+        updateCountdown();
+
+        // Cambiar los fuegos a rojos una semana antes del evento
+        setInterval(function() {
+            if (new Date().getTime() >= oneWeekBefore) {
+                fireworkColor = 'red'; // Cambiar el color a rojo una semana antes
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
+
+
