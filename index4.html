@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trianguito Ochentero</title>
-        <link data-default-icon="" rel="icon" sizes="192x192" href="https://cdn.icon-icons.com/icons2/321/PNG/512/Triangle_34546.png">
-
+    <title>Triangulito Ochentero</title>
+    <link rel="icon" sizes="192x192" href="https://cdn.icon-icons.com/icons2/321/PNG/512/Triangle_34546.png">
     <style>
+        /* General Styles */
         * {
             margin: 0;
             padding: 0;
@@ -34,26 +34,24 @@
         }
 
         @keyframes glow {
-            0% {
+            0%, 100% {
                 text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 0, 128, 0.6);
             }
             50% {
                 text-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 40px rgba(255, 0, 128, 0.8);
             }
-            100% {
-                text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 0, 128, 0.6);
-            }
         }
 
+        /* Triangle Animation */
         .triangle {
             width: 0;
             height: 0;
             border-left: 100px solid transparent;
             border-right: 100px solid transparent;
             border-bottom: 200px solid white;
-            margin: 0 auto;
+            margin: 20px auto;
             animation: spin 4s linear infinite, bounce 2s ease-in-out infinite;
-            transform-origin: center;
+            position: relative;
         }
 
         @keyframes spin {
@@ -67,224 +65,48 @@
 
         @keyframes bounce {
             0%, 100% {
-                transform: translateY(0);
+                transform: translateY(0) rotate(0deg);
             }
             50% {
-                transform: translateY(-20px);
+                transform: translateY(-20px) rotate(0deg);
             }
         }
 
-        .info {
-            margin-top: 30px;
-        }
-
-        .instagram {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 0, 128, 0.6);
-        }
-
-        .instagram img {
-            width: 30px;
-            height: 30px;
-        }
-
-        .message {
-            margin-top: 10px;
-            font-size: 1.2rem;
-            font-style: italic;
-        }
-
-        footer {
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        footer span {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        footer span img {
-            width: 14px;
-            height: 14px;
-        }
-
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            .triangle {
-                border-left: 80px solid transparent;
-                border-right: 80px solid transparent;
-                border-bottom: 160px solid white;
-            }
-
-            .instagram {
-                font-size: 1.2rem;
-            }
-
-            .instagram img {
-                width: 24px;
-                height: 24px;
-            }
-
-            footer {
-                font-size: 0.8rem;
-            }
-
-            footer span img {
-                width: 12px;
-                height: 12px;
-            }
-        }
-        .formularioyeyo{
-            padding-right: cm;
-            padding-top: ;
-
-        }
-        body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
-
-
-
-
-.logo a {
-    color: white;
-    text-decoration: none;
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.menu ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-    margin: 0;
-    padding: 0;
-}
-
-.menu ul li a {
-    text-decoration: none;
-    color: white;
-    font-size: 1rem;
-    transition: color 0.3s ease;
-}
-
-.menu ul li a:hover {
-    color: #f0a500;
-}
-
-/* Estilos del menú hamburguesa */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 5px;
-}
-
-.hamburger span {
-    display: block;
-    width: 25px;
-    height: 3px;
-    background-color: white;
-}
-
-/* Secciones */
-section {
-    padding: 50px 20px;
-    text-align: center;
-}
-
-/* Estilos responsivos */
-@media (max-width: 768px) {
-    .menu {
-        display: none;
-    }
-
-    .hamburger {
-        display: flex;
-    }
-
-    .menu.active {
-        display: block;
-        position: absolute;
-        top: 60px;
-        right: 20px;
-        background-color: #7a4646;
-        padding: 10px;
-        border-radius: 5px;
-    }
-
-    .menu ul {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .menu ul li a {
-        font-size: 1.2rem;
-    }
-}
-body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            overflow: hidden;
-        }
-
-        /* Estilos de la cuenta atrás */
-        .countdown-container {
+        /* Popout Modal */
+        .modal {
+            display: none;
             position: fixed;
-            top: 20px;
-            left: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.7);
+            background: rgb(105, 60, 60);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
             padding: 20px;
-            width: 300px;
-            text-align: left;
-            z-index: 10;
-        }
-
-        .countdown-container h2 {
-            margin-top: 0;
-            color: #222;
-            text-transform: uppercase;
-            font-size: 1.2rem;
-        }
-
-        .event h3 {
-            color: #ff5722;
-            font-size: 1rem;
-            margin: 10px 0 5px;
-        }
-
-        .event p {
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        #countdown {
-            margin-top: 10px;
-            font-size: 1.5rem;
-            color: #333;
-            font-weight: bold;
             text-align: center;
-            background: #eee;
-            padding: 10px;
+            z-index: 1000;
+            border-radius: 8px;
+            animation: popIn 0.5s ease-out forwards;
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: translate(-50%, -50%) scale(0.7);
+                opacity: 0;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .close-btn {
+            background-color: #8000ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
             border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
         }
 
         .fireworks {
@@ -293,101 +115,62 @@ body {
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none; /* Asegura que los fuegos no interfieran con otros elementos */
-            z-index: 1; /* Coloca los fuegos detrás de otros elementos */
+            pointer-events: none;
+            z-index: 10;
         }
 
-        .firework {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: blue;
-            border-radius: 50%;
-            opacity: 1;
-            animation: explode 1s forwards;
+        /* Footer */
+        footer {
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
         }
-
-        @keyframes explode {
-            0% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(3);
-                opacity: 0;
-            }
-        }
-   </style>
+    </style>
 </head>
 <body>
-   
-    <!-- Copyright web design to Andrip 2024-->
     <h1>Triangulito Ochentero</h1>
-    
-        <div class="menu">
-            <ul>
-                <li><a href="galeria.html">Galería</a></li>
-                <li><a href="#sobre-nosotros">Sobre Nosotros</a></li>
-                <li><a href="#fundacion">Fundación</a></li>
-            </ul>
-        </div>
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </nav>
+
     <div class="triangle"></div>
-    <div class="info">
-        <div class="formularioyeyo">
-            <h2>Iniciar Sesión</h2>
-            <input type="text" id="username" placeholder="Usuario">
-            <br>
-            <br>
-            <input type="password" id="password" placeholder="Contraseña">
-            <br>
-            <br>
-            <button onclick="login()">Acceder</button>
-            <br>
-            <br>
-            <button><a href="galeria.html">GALERIA</a></button>
-        </div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <script src="credentials.js"></script>
-    
-        <script>
-            function login() {
-                const username = document.getElementById('username').value;
-                const password = document.getElementById('password').value;
-    
-                if (username === credentials.username && password === credentials.password) {
-                    localStorage.setItem('authToken', 'authenticated');
-                    window.location.href = 'index2.html';
-                } else {
-                    alert('Usuario o contraseña incorrectos');
-                }
-            }
-            
-        </script>
-        <div class="instagram" style="padding-top: 3cm;">
-            
-            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram logo">
-            makelele3.0_
-        </div>
-         <!-- Easter egg -->
-        <div class="message">Pronto más información</div>
+
+    <div class="formulario">
+        <h2>Iniciar Sesión</h2>
+        <input type="text" id="username" placeholder="Usuario">
+        <input type="password" id="password" placeholder="Contraseña">
+        <button onclick="login()">Acceder</button>
+        <button><a href="galeria.html">Galería</a></button>
     </div>
-    
+
+    <div class="modal" id="specialModal">
+        <h2>🎉 ¡Feliz Aniversario de Makelele! 🎆</h2>
+        <p>Y Felicidades a Lulo también.</p>
+        <p>09/12/2024</p>
+        <button class="close-btn" onclick="closeModal()">Cerrar</button>
+    </div>
+
+    <div class="fireworks" id="fireworks"></div>
+
     <footer>
-        <span>
-            by andrip 2024 &copy;
-        </span>
+        <span>by Andrip 2024 &copy;</span>
     </footer>
+
+    <script>
+        function login() {
+            alert('Accediendo...');
+        }
+
+        function closeModal() {
+            document.getElementById('specialModal').style.display = 'none';
+        }
+
+        function showModalIfToday() {
+            const today = new Date();
+            if (today.getDate() === 9 && today.getMonth() === 11) {
+                document.getElementById('specialModal').style.display = 'block';
+            }
+        }
+
+        // Mostrar modal el 9 de diciembre
+        showModalIfToday();
+    </script>
 </body>
-     <!-- Copyright web design to Andrip 2024-->
 </html>
