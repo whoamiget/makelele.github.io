@@ -72,6 +72,55 @@
             }
         }
 
+        /* Form Styles */
+        .formulario {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .formulario h2 {
+            margin-bottom: 15px;
+        }
+
+        .formulario input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .formulario input:focus {
+            border-color: #ff0080;
+            box-shadow: 0 0 10px #ff0080;
+            transform: scale(1.05);
+        }
+
+        .formulario button {
+            background: #ff0080;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .formulario button:hover {
+            background: #ff66b2;
+            transform: scale(1.1);
+        }
+
+        .formulario a {
+            text-decoration: none;
+            color: white;
+        }
+
         /* Popout Modal */
         .modal {
             display: none;
@@ -125,6 +174,51 @@
             margin-bottom: 20px;
             text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
         }
+
+        /* Popout Modal for Login */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.7);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 1100;
+            text-align: center;
+            animation: fadeIn 0.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .error-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.7);
+            background: rgba(255, 0, 0, 0.9);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 1200;
+            text-align: center;
+            animation: popIn 0.5s forwards;
+        }
+
+        .error-modal h2 {
+            margin-bottom: 10px;
+        }
+
     </style>
 </head>
 <body>
@@ -147,6 +241,15 @@
         <button class="close-btn" onclick="closeModal()">Cerrar</button>
     </div>
 
+    <div class="login-modal" id="loginModal">
+        <h2>Iniciando sesión...</h2>
+    </div>
+
+    <div class="error-modal" id="errorModal">
+        <h2>⚠️ Error ⚠️</h2>
+        <p>Credenciales incorrectas marico, vuelve a introducirlas.</p>
+    </div>
+
     <div class="fireworks" id="fireworks"></div>
 
     <footer>
@@ -154,23 +257,70 @@
     </footer>
 
     <script>
+        const MAX_ATTEMPTS = 3;
+        let attempts = 0;
+
         function login() {
-            alert('Accediendo...');
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const loginModal = document.getElementById('loginModal');
+            const errorModal = document.getElementById('errorModal');
+
+            if (attempts >= MAX_ATTEMPTS) {
+                alert('Has alcanzado el número máximo de intentos. Intenta de nuevo en 30 minutos.');
+                return;
+            }
+
+            loginModal.style.display = 'block';
+
+            setTimeout(() => {
+                loginModal.style.display = 'none';
+                if (username === 'aljenis' && password === 'administradoresmakelele') {
+                    localStorage.setItem('authToken', 'authenticated');
+                    alert('Usuario correcto, click en aceptar.');
+                    window.location.href = 'index2.html';
+                } else {
+                    attempts++;
+                    errorModal.style.display = 'block';
+                    setTimeout(() => {
+                        errorModal.style.display = 'none';
+                    }, 2000);
+                }
+            }, 2000);
         }
 
         function closeModal() {
             document.getElementById('specialModal').style.display = 'none';
         }
 
-        function showModalIfToday() {
-            const today = new Date();
-            if (today.getDate() === 9 && today.getMonth() === 11) {
-                document.getElementById('specialModal').style.display = 'block';
-            }
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const specialModal = document.getElementById('specialModal');
+            const currentDate = new Date();
+            const day = currentDate.getDate();
+            const month = currentDate.getMonth() + 1;
 
-        // Mostrar modal el 9 de diciembre
-        showModalIfToday();
+            if (day === 9 && month === 12) {
+                specialModal.querySelector("h2").textContent = "🎉 ¡Feliz Aniversario de Makelele! 🎆 saludos andrip";
+                specialModal.querySelector("p").textContent = "Y Felicidades a Lulo también.";
+                specialModal.querySelector("p:nth-of-type(2)").textContent = "09/12/2024";
+                specialModal.style.display = 'block';
+            } else if (day === 1 && month === 1) {
+                specialModal.querySelector("h2").textContent = "🎉 ¡Feliz Año Nuevo Makelele! 🎆 saludos andrip";
+                specialModal.querySelector("p").textContent = "";
+                specialModal.querySelector("p:nth-of-type(2)").textContent = "01/01/2024";
+                specialModal.style.display = 'block';
+            } else if (day === 25 && month === 12) {
+                specialModal.querySelector("h2").textContent = "🎄 ¡Feliz Navidad Makelele! 🎄 saludos andrip";
+                specialModal.querySelector("p").textContent = "";
+                specialModal.querySelector("p:nth-of-type(2)").textContent = "25/12/2024";
+                specialModal.style.display = 'block';
+            } else if (day === 24 && month === 12) {
+                specialModal.querySelector("h2").textContent = "🌟 ¡Feliz Nochebuena Makelele! 🌟 saludos andrip.";
+                specialModal.querySelector("p").textContent = "";
+                specialModal.querySelector("p:nth-of-type(2)").textContent = "24/12/2024";
+                specialModal.style.display = 'block';
+            }
+        });
     </script>
 </body>
 </html>

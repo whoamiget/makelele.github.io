@@ -3,10 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trianguito Ochentero</title>
-    <link data-default-icon="" rel="icon" sizes="192x192" href="https://cdn.icon-icons.com/icons2/321/PNG/512/Triangle_34546.png">
+    <title>Triangulito Ochentero</title>
+    <link rel="icon" sizes="192x192" href="https://cdn.icon-icons.com/icons2/321/PNG/512/Triangle_34546.png">
     <style>
-        /* Mantiene todos los estilos existentes */
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(135deg, #ff0080, #8000ff);
@@ -18,39 +24,228 @@
             color: white;
             text-align: center;
         }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 0, 128, 0.6);
+            margin-top: 20px;
+            animation: glow 2s infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 0, 128, 0.6);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 40px rgba(255, 0, 128, 0.8);
+            }
+        }
+
+        /* Triangle Animation */
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 200px solid white;
+            margin: 20px auto;
+            animation: spin 4s linear infinite, bounce 2s ease-in-out infinite;
+            position: relative;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(0deg);
+            }
+        }
+
+        /* Form Styles */
+        .formulario {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .formulario h2 {
+            margin-bottom: 15px;
+        }
+
+        .formulario input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .formulario button {
+            background: #ff0080;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            transition: background 0.3s ease;
+        }
+
+        .formulario button:hover {
+            background: #ff66b2;
+        }
+
+        .formulario a {
+            text-decoration: none;
+            color: white;
+        }
+
+        /* Popout Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.7);
+            background: rgb(105, 60, 60);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            text-align: center;
+            z-index: 1000;
+            border-radius: 8px;
+            animation: popIn 0.5s ease-out forwards;
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: translate(-50%, -50%) scale(0.7);
+                opacity: 0;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .close-btn {
+            background-color: #8000ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Footer */
+        footer {
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Popout Modal for Login */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.7);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 1100;
+            text-align: center;
+            animation: fadeIn 0.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>Trianguito Ochentero</h1>
-    <div class="info">
-        <div class="triangle"></div>
-        <div class="login-form">
-            <h2>Iniciar Sesión</h2>
-            <input type="text" id="username" placeholder="Usuario">
-            <input type="password" id="password" placeholder="Contraseña">
-            <button onclick="login()">Acceder</button>
-        </div>
-    </div>
-    <footer>
-        <span>by andrip 2024 &copy;</span>
-    </footer>
+    <h1>Triangulito Ochentero</h1>
 
-    <!-- Importar el archivo de credenciales -->
-    <script src="credentials.js"></script>
+    <div class="triangle"></div>
+
+    <div class="formulario">
+        <h2>Iniciar Sesión</h2>
+        <input type="text" id="username" placeholder="Usuario">
+        <input type="password" id="password" placeholder="Contraseña">
+        <button onclick="login()">Acceder</button>
+        <button><a href="galeria.html">Galería</a></button>
+    </div>
+
+    <div class="modal" id="specialModal">
+        <h2>🎉 ¡Feliz Aniversario de Makelele! 🎆</h2>
+        <p>Y Felicidades a Lulo también.</p>
+        <p>09/12/2024</p>
+        <button class="close-btn" onclick="closeModal()">Cerrar</button>
+    </div>
+
+    <div class="login-modal" id="loginModal">
+        <h2>Iniciando sesión...</h2>
+    </div>
+
+    <div class="fireworks" id="fireworks"></div>
+
+    <footer>
+        <span>by Andrip 2024 &copy;</span>
+    </footer>
 
     <script>
         function login() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+            const modal = document.getElementById('loginModal');
+            modal.style.display = 'block';
 
-            // Verificar con las credenciales cargadas desde credentials.js
-            if (username === credentials.username && password === credentials.password) {
-                localStorage.setItem('authToken', 'authenticated');
+            setTimeout(() => {
                 window.location.href = 'index2.html';
-            } else {
-                alert('Usuario o contraseña incorrectos');
+            }, 2000);
+        }
+
+        function closeModal() {
+            document.getElementById('specialModal').style.display = 'none';
+        }
+
+        function showModalIfToday() {
+            const today = new Date();
+            if (today.getDate() === 9 && today.getMonth() === 11) {
+                document.getElementById('specialModal').style.display = 'block';
             }
         }
+
+        // Mostrar modal el 9 de diciembre
+        showModalIfToday();
     </script>
 </body>
 </html>

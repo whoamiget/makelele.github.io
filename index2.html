@@ -11,10 +11,8 @@
 <body>
     <div>
         <h1>Bienvenido a la página privada de makelele 3.0</h1>
-        <p>Hola, soy Andrip, el creador de esta página web.
-             Si has conseguido acceso a esta web felicidades,encontraste el easter egg del yeyo. Si has entrado en esta web antes de tiempo, como puedes comprobar está aún en mantenimiento.
-            Pronto obtendrás más información. </p>
-            <p>Si te quieres unir al proyecto de creación de esta pagina web. No dudes en contactarme por correo.
+        <p></p>
+            <p>Si te quieres unir al proyecto de creación de esta pagina web o quieres aportar ideas, no dudes en contactarme por correo.
                 <a style="color: rgb(15, 117, 212);" href="mailto:andrip@duck.com">Correo</a>
             </p>
         <button onclick="logout()">Cerrar Sesión</button>
@@ -105,12 +103,12 @@
     <script>
         const authToken = localStorage.getItem('authToken');
         if (authToken !== 'authenticated') {
-            window.location.href = 'index.html';
+            window.location.href = 'index2.html';
         }
 
         function logout() {
             localStorage.removeItem('authToken');
-            window.location.href = 'index.html';
+            window.location.href = 'index4.html';
         }
     </script>
 
